@@ -1,5 +1,6 @@
-# exe
+# exe and iss
 **/*.exe
+**/*.iss
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
