@@ -29,10 +29,6 @@ class DBOperations():
                         '''):
                     weather.append(row)
 
-            # with DBCM(self.db) as cursor:
-            #     for row in cursor.execute('SELECT SAMPLE_DATE, MIN_TEMP, MAX_TEMP, AVG_TEMP FROM SAMPLES'):
-            #         weather.append(row)
-
             print('data fetched')
 
         except Exception as exception:
@@ -58,9 +54,6 @@ class DBOperations():
 
         except Exception as exception:
             print('could not save data:', exception)
-
-        # for row in cursor.execute('SELECT SAMPLE_DATE, LOCATION, MIN_TEMP, MAX_TEMP, AVG_TEMP FROM SAMPLES'):
-        #     print(row)
 
     def initialize_db(self) -> None:
         '''initializes the database'''
@@ -93,9 +86,4 @@ class DBOperations():
 
         except Exception as exception:
             print('could not purge database:', exception)
-
-# weather = {'2018-06-01': {'Max': 12.0, 'Min': 5.6, 'Mean': 7.1},
-#             '2018-06-02': {'Max': 22.2, 'Min': 11.1, 'Mean': 15.5},
-#             '2018-06-03': {'Max': 31.3, 'Min': 29.9, 'Mean': 30.0}}
-#initialize_db()
-#insert(weather)
+            

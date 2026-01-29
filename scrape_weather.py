@@ -44,12 +44,6 @@ class MyHTMLParser(HTMLParser):
         if tag == 'td':
             self.td_tag = True
 
-        # if tag == 'a' and attrs[0][1].startswith('generate_chart'):
-        #     splits = attrs[0][1].split('&')
-        #     month = splits[6].split('=')[1]
-        #     year = splits[5].split('=')[1]
-        #     self.date = year + '-' + month
-
         if tag == 'a' and attrs[0][1].startswith('/climate_data/hourly_data'):
             splits = attrs[0][1].split('&')
             day = splits[4].split('=')[1]
@@ -65,10 +59,6 @@ class MyHTMLParser(HTMLParser):
             self.date = year + '-' + month + '-' + day
             self.valid_row = True
 
-        # if tag == 'abbr' and attrs[0][1].startswith(self.months):
-        #     self.getDay = True
-        #     self.validRow = True
-
         if tag == 'a' and attrs[0][1].startswith('#legend'):
             self.valid_row = False
 
@@ -77,10 +67,6 @@ class MyHTMLParser(HTMLParser):
                 print('this thing')
                 if attrs[1][1] == 'previous':
                     self.end_of_page = True
-                # if attrs[1][1] == 'previous disabled':
-                #     self.previous = ''
-                #     self.end = True
-                #     print('end of scraping')
 
         if tag == 'a' and attrs[0][1] == 'prev' and self.end != True and self.end_of_page:
             self.previous = self.base_url + attrs[1][1]
@@ -93,7 +79,6 @@ class MyHTMLParser(HTMLParser):
             self.count = 0
             if self.valid_row:
                 self.weather[self.date] = self.daily_temps
-                #print(self.daily_temps)
             self.valid_row = False
             self.daily_temps = {}
             self.date = ''
@@ -120,11 +105,6 @@ def scrape():
         html = str(response.read())
 
     myHTMLParser.feed(html)
-    
-    # with urllib.request.urlopen(myHTMLParser.previous) as response:
-    #     html = str(response.read())
-
-    # myHTMLParser.feed(html)
 
     while myHTMLParser.previous != '':
         print(myHTMLParser.previous)
@@ -134,4 +114,3 @@ def scrape():
             myHTMLParser.feed(html)
 
     return myHTMLParser.weather
-    # print(myHTMLParser.weather)
